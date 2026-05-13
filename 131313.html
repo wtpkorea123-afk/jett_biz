@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JETT(Johns Elite Teaching Team) - 엘리트 영어교사로 구성된 팀</title>
+    <style>
+        /* 기본 스타일 */
+        body { margin: 0; font-family: 'Pretendard', sans-serif; line-height: 1.6; color: #333; }
+        
+        /* 헤더 스타일 */
+        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: fixed; width: 90%; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: bold; color: #1a2a6c; cursor: pointer; }
+        
+        /* 네비게이션 스타일 */
+        nav { display: flex; align-items: center; }
+        .nav-item { position: relative; margin-left: 20px; display: inline-block; }
+        .nav-link { text-decoration: none; color: #555; font-weight: 500; cursor: pointer; padding: 10px 0; }
+        .nav-link:hover { color: #1a2a6c; }
+
+        /* 드롭다운 스타일 */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 140px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content a {
+            color: #555;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+        .dropdown-content a:hover { background-color: #f1f1f1; color: #1a2a6c; border-radius: 5px; }
+        .nav-item:hover .dropdown-content { display: block; }
+
+        /* 섹션 제어 */
+        .content-section { display: none; padding: 120px 5% 60px; min-height: 80vh; }
+        .active { display: block !important; }
+
+        /* 홈(Hero) 스타일 */
+        .hero { 
+            height: 80vh; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80'); 
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
+        .btn { padding: 15px 35px; background: #f39c12; color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+
+        /* 프로필 카드 스타일 (박스 크기를 글씨 길이에 맞춤) */
+        .profile-card {
+            width: fit-content; /* 내부 컨텐츠 길이에 맞춤 */
+            margin: 0 auto; 
+            background: #f9f9f9; 
+            padding: 50px 60px; /* 좌우 여백을 충분히 주어 안정감 확보 */
+            border-radius: 20px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .profile-info h3 { font-size: 2.2rem; margin: 0 0 5px 0; color: #1a2a6c; }
+        .profile-info .sub-title { color: #f39c12; font-weight: bold; margin-bottom: 25px; display: block; }
+        
+        .profile-list { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0;
+            white-space: nowrap; /* 글자가 박스 밖으로 밀리지 않도록 설정 */
+        }
+        .profile-list li { margin-bottom: 12px; font-size: 1.1rem; }
+        .profile-list li::before { content: '• '; color: #f39c12; font-weight: bold; margin-right: 8px; }
+        
+        .section-title { text-align: center; font-size: 2rem; color: #1a2a6c; margin-bottom: 40px; }
+
+        /* 문의 섹션 스타일 */
+        .contact-box {
+            background: #f9f9f9; padding: 40px; border-radius: 20px; display: inline-block; min-width: 320px;
+        }
+        .contact-box p { font-size: 1.1rem; margin: 15px 0; }
+        .contact-box a { color: #333; text-decoration: none; font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+        .contact-box a:hover { color: #1a2a6c; border-bottom-color: #1a2a6c; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="showSection('home')">JETT</div>
+    <nav>
+        <div class="nav-item">
+            <span class="nav-link">JETT</span>
+            <div class="dropdown-content">
+                <a onclick="showSection('jett-intro')">JETT 소개</a>
+                <a onclick="showSection('about')">교사 소개</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" onclick="showSection('service')">서비스 안내</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" onclick="showSection('contact')">상담 문의</a>
+        </div>
+    </nav>
+</header>
+
+<!-- 1. 홈 섹션 -->
+<section id="home" class="content-section active">
+    <div class="hero">
+        <h1>당신이 있는 곳이 강의실이 됩니다</h1>
+        <p style="margin-bottom: 30px;">영어 교육 전문가들의 맞춤형 프리미엄 수업</p>
+        <button class="btn" onclick="showSection('contact')">무료 상담 신청하기</button>
+    </div>
+</section>
+
+<!-- 2. JETT 소개 섹션 -->
+<section id="jett-intro" class="content-section">
+    <h2 class="section-title">About JETT</h2>
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 1.2rem; margin-bottom: 50px;">JETT(Johns Elite Teaching Team)는 <strong>엘리트 영어교사로 구성된 팀</strong>입니다.</p>
+        <p style="font-size: 1.2rem; margin-bottom: 50px;">학습자가 원하는 장소에서 최고의 수업을 제공합니다.</p>
+    </div>
+</section>
+
+<!-- 3. 교사 소개 섹션 (박스 크기 최적화) -->
+<section id="about" class="content-section">
+    <h2 class="section-title">Instructor Profile</h2>
+    <div class="profile-card">
+        <div class="profile-info">
+            <h3>John Lee</h3>
+            <span class="sub-title">JETT 대표 인스트럭터</span>
+            
+            <ul class="profile-list">
+                <li>JETT 대표</li>
+                <li>교육청 정식 등록</li>
+                <li>CELTA 자격증 소지 (TESOL 상위급)</li>
+                <li>케임브리지 대학교 인증 교사</li>
+                <li>AI 응용 교수법 연구</li>
+                <li>대한민국 육군 병장 만기 전역</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 4. 서비스 안내 섹션 -->
+<section id="service" class="content-section">
+    <h2 class="section-title">Our Services</h2>
+    <div style="text-align: center; max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div style="padding: 30px; background: #f9f9f9; border-radius: 10px;">
+            <h3>1:1 레슨</h3>
+            <p>프리미엄 맞춤 수업</p>
+        </div>
+        <div style="padding: 30px; background: #f9f9f9; border-radius: 10px;">
+            <h3>그룹 레슨</h3>
+            <p>시스템화된 그룹 수업</p>
+        </div>
+    </div>
+</section>
+
+<!-- 5. 상담 문의 섹션 -->
+<section id="contact" class="content-section" style="text-align: center;">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-box">
+        <p>전화: <strong><a href="tel:010-5861-7928">010-5861-7928</a></strong></p>
+        <p>이메일: <strong><a href="mailto:jett_biz@naver.com">jett_biz@naver.com</a></strong></p>
+        <p style="color: #888; font-size: 0.9rem; margin-top: 20px;">* 모든 상담은 예약제로 운영됩니다.</p>
+    </div>
+</section>
+
+<script>
+    function showSection(id) {
+        var sections = document.getElementsByClassName('content-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.remove('active');
+        }
+        
+        var target = document.getElementById(id);
+        if (target) {
+            target.classList.add('active');
+        }
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
